@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MAEL:SUBSCRIBE PAGE</title>
+        <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <div class="logo">
+                <img src="logo.png">
+                <span>mael.mp3</span>
+            </div>
+            <ul>
+                <li><a href="./index.html">HOME</a></li>
+                <li><a href="./about.html">ABOUT</a></li>
+                <li><a href="./music.html">MUSIC</a></li>
+                <li><a href="./projects.html">PROJECTS</a></li>
+            </ul>
+        </nav>
+
+        <div style="margin-top: 50px; text-align: center;">
+          <p>SUBSCRIBE FOR NEW RELEASES:</p>
+          <form name="submit-to-google-sheet">
+            <input type="email" name="Email" placeholder="Your email ID" required>
+            <button type="submit"><img src="send-icon.png" width="30px"></button>
+          </form>
+          <span id="msg"> </span>
+        </div>
+        
+
+    
+
+    </div> 
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzFLLM5svF1AF5moK8wzY_jhxQNp76IQlsH3TIzKp9EQSgMO8JQPGCFdhND7EphjVUj/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+          msg.innerHTML="Thank You For Subscribing :3"
+          setTimeout(function(){
+            msg.innerHTML=""
+          },5000)
+          form.reset()
+
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+
+
+
+
+</body>
+</html>
+
